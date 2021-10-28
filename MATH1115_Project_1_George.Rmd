@@ -1,0 +1,101 @@
+---
+title: "MATH1115 Project 1: Spotify Dataset Exploration"
+author: "George Wu (500497375)"
+date: "University of Sydney | MATH1115 | August 2021"
+output:
+  html_document:
+    code_download: true # embed .Rmd file
+    toc: true  # table of contents
+    toc_depth: 3
+    toc_float: true # toc is always visible when scrolled
+    number_sections: false 
+    df_print: paged # format data frame outputs automatically
+    theme: sandstone # theme the doc
+    highlight: tango # theme syntax colouring
+---
+
+```{css newstyles, echo=FALSE}
+h1, .h1, h2, .h2, h3, .h3 { /* Add space before headings: */
+    margin-top: 56px;
+}
+h1, h2 { /* add border to h1 and h2 */
+  border-bottom: solid 1px #666;
+}
+h2 { /* Resize header 2: */
+  font-size: 22px;
+}
+body { /* Make main text colour black */
+  color: black;
+}
+a { /* Link colours */
+  color: blue;
+}
+.tocify { /* Some toc fixes*/
+  width: 100% !important;
+  border: none; /* remove border */
+}
+.tocify-header { /* fix for horrible indent in toc */
+  text-indent: initial;
+}
+
+```
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+# Executive Summary
+- The aim of this report is to ...
+- The main discoveries are ...
+
+# Full Report
+
+#Executive Summary
+
+The main aim of this report was to outline the relationships that make specific songs popular, and we explored musical characteristics such as tempo, genre, danceability and acousticness, and attempted to prove whether there were strong correlations between a song's characteristics and it's overall popularity among Spotify listeners. From what was made available in the dataset, we found that the Hip Hop, Pop, Dance Pop, and Reggaeton genres were the most popular amongst worldwide Spotify listeners, but also that there were weak correlations between a song's tempo, danceability and acousticness with it's popularity. 
+
+## Initial Data Analysis (IDA)
+
+*Classification of Data Variables*
+```{r}
+# read the Spotify data
+spotify <- read_csv("spotify_dataset_cleaned.csv", show_col_types = FALSE)
+#Check the size of data
+dim(spotify)
+#Check names of all the variables
+names(spotify)
+#Check structure of the data set
+str(spotify)
+```
+Summary (suggestion):
+
+- The data came from ...
+- The data is/is not valid because ...
+- Possible issues include ...
+- Each row represents ...
+- Each column represents ...
+
+
+## Research Question 1: What genre of music do listeners on Spotify enjoy listening to the most?
+
+Another topic we wanted to explore with this Spotify data set was finding out which genre of music listeners from all over the world were listening to the most. We wanted to have a look at what type of music the world is listening to. Exploring this data helps us understand what genres of music people are interested in the most, which helps us identify trends that will help us understand what the music industry is looking to do in the future. The most effective way to map out this was to illustrate a bar graph, with the x axis being the amount of Streams compared to the y axis, which is the genre of music. 
+
+```{r, message=FALSE, warning=FALSE}
+spotify %>%
+  ggplot(aes(Streams, Genre, fill = Genre)) +
+  geom_bar(stat = "identity") +
+  xlab("Streams") + 
+  ylab("Genre") +
+  ggtitle("Amount of Streams per Genre") + 
+  theme(plot.title = element_text(hjust = 0))
+```
+Research Report: https://www.statista.com/statistics/475667/streamed-music-consumption-genre-usa/
+
+Observation: Hip Hop is the most listened to genre of music. Pop, Dance Pop and Reggaeton music come behind Hip Hop. 
+
+While the report supports the fact that Hip Hop is the most popular genre of music, the genre that surprisingly came in 2nd place was Rock music. This could be because this report only explicitly covers the United States instead of the whole world, which can result in different tastes in music. Pop music came in 3rd place, while Dance/EDM music came in 6th, with Reggaeton not even appearing within the top 11. 
+
+
