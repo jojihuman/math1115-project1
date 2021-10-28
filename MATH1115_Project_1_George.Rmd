@@ -47,10 +47,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r setup, message=FALSE, warning=FALSE}
 library(tidyverse)
 ```
-# Executive Summary
-- The aim of this report is to ...
-- The main discoveries are ...
-
 # Full Report
 
 #Executive Summary
@@ -70,14 +66,6 @@ names(spotify)
 #Check structure of the data set
 str(spotify)
 ```
-Summary (suggestion):
-
-- The data came from ...
-- The data is/is not valid because ...
-- Possible issues include ...
-- Each row represents ...
-- Each column represents ...
-
 
 ## Research Question 1: What genre of music do listeners on Spotify enjoy listening to the most?
 
